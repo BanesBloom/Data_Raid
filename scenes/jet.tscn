@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://yxyiasgf4cgq"]
+
+[ext_resource type="Script" path="res://scripts/jet.gd" id="1_2bkbe"]
+[ext_resource type="Texture2D" uid="uid://cmtuqp4ugogep" path="res://sprites/Fighter_Base.png" id="1_5uvrb"]
+[ext_resource type="Material" uid="uid://bh2g40q1m751a" path="res://effects/particles/explosion.tres" id="3_k2xam"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wkivf"]
+size = Vector2(58, 42)
+
+[sub_resource type="Curve" id="Curve_fg53a"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ru24t"]
+curve = SubResource("Curve_fg53a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vmtva"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 10.0
+color = Color(1, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_ru24t")
+
+[node name="Jet" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_2bkbe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("1_5uvrb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wkivf")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+process_mode = 3
+emitting = false
+amount = 100
+process_material = ExtResource("3_k2xam")
+one_shot = true
+explosiveness = 1.0
+randomness = 0.1
+
+[node name="Trail" type="GPUParticles2D" parent="."]
+position = Vector2(-25, 0)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_vmtva")
+lifetime = 0.5

@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfdvwdwnccaqp"]
+
+[ext_resource type="Script" path="res://scripts/piece.gd" id="1_8t041"]
+[ext_resource type="Texture2D" uid="uid://dsfbidjxqj8fu" path="res://sprites/levels/odd_1.png" id="2_j8xdb"]
+[ext_resource type="PackedScene" uid="uid://blf7mep0qv41u" path="res://scenes/fuel.tscn" id="3_j7t52"]
+[ext_resource type="PackedScene" uid="uid://cxrktxnkfcvr3" path="res://scenes/boat.tscn" id="4_qlq2o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wcml1"]
+size = Vector2(1700, 150)
+
+[node name="Piece" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_8t041")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_j8xdb")
+
+[node name="Trigger Area" type="Area2D" parent="."]
+position = Vector2(0, -1275)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger Area"]
+shape = SubResource("RectangleShape2D_wcml1")
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Fuel" parent="Obstacles" instance=ExtResource("3_j7t52")]
+position = Vector2(-376, 59)
+
+[node name="Boat" parent="Obstacles" instance=ExtResource("4_qlq2o")]
+position = Vector2(374, 82)
+
+[node name="Boat2" parent="Obstacles" instance=ExtResource("4_qlq2o")]
+position = Vector2(-3, -767)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(299, -1201, 851, -1201, 862, 1208, 299, 1201, 303, 900, 151, 752, 151, 599, 452, 301, 449, -150, 153, -447, 151, -831, 301, -1127)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(151, -225, 151, -149, 187, -112, 75, -113, 38, -150, 0, -151, -1, -302, 75, -337)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -76, 149, -76, 300, 0, 301, 149, 188, 261, 113, 263, 0, 75)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-298, 1, -149, 76, -38, 375, -74, 450, -264, 300, -301, 188)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-150, -260, -115, -188, -150, -150, -151, -1, -200.595, -100.849, -225, -76, -225, -150)
+
+[node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(76, 899, 151, 1125, 226, 1014, 151, 900)
+
+[node name="CollisionPolygon2D7" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-303, -1200, -850, -1200, -858, 1212, -296, 1200, -299, 1124, -151, 974, -151, 601, -453, 301, -451, -149, -151, -451, -149, -824, -299, -1129)

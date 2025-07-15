@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://phfwqklfapoj"]
+
+[ext_resource type="Script" path="res://scripts/piece.gd" id="1_o4fo7"]
+[ext_resource type="Texture2D" uid="uid://cidpcovv67bch" path="res://sprites/levels/normal_1.png" id="2_to2jf"]
+[ext_resource type="PackedScene" uid="uid://blf7mep0qv41u" path="res://scenes/fuel.tscn" id="3_tfbhj"]
+[ext_resource type="PackedScene" uid="uid://cxrktxnkfcvr3" path="res://scenes/boat.tscn" id="4_q4hq7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wcml1"]
+size = Vector2(1700, 150)
+
+[node name="Piece" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_o4fo7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_to2jf")
+
+[node name="Trigger Area" type="Area2D" parent="."]
+position = Vector2(0, -1275)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger Area"]
+shape = SubResource("RectangleShape2D_wcml1")
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Fuel" parent="Obstacles" instance=ExtResource("3_tfbhj")]
+
+[node name="Boat" parent="Obstacles" instance=ExtResource("4_q4hq7")]
+position = Vector2(102, 922)
+
+[node name="Boat2" parent="Obstacles" instance=ExtResource("4_q4hq7")]
+position = Vector2(213, 869)
+
+[node name="Boat3" parent="Obstacles" instance=ExtResource("4_q4hq7")]
+position = Vector2(92, 462)
+
+[node name="Boat4" parent="Obstacles" instance=ExtResource("4_q4hq7")]
+position = Vector2(-215, -396)
+
+[node name="Boat5" parent="Obstacles" instance=ExtResource("4_q4hq7")]
+position = Vector2(113, -475)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(300, 1204, 300, 1125, 451, 974, 450, 374, 0, -75, 225, -450, 225, -749, 300, -898, 300, -1199, 858, -1199, 866, 411, 882, 1208)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-300, 1241, -300, 1126, -150, 975, -151, 523, -526, 74, -526, -451, -300, -900, -300, -1198, -842, -1198, -845, -893, -842, 1218)

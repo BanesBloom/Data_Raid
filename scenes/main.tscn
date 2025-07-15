@@ -1,0 +1,302 @@
+[gd_scene load_steps=18 format=3 uid="uid://dfween68itcrb"]
+
+[ext_resource type="Script" path="res://scripts/main_controller.gd" id="1_wdci5"]
+[ext_resource type="PackedScene" uid="uid://6lvl3qnm5vbf" path="res://scenes/pieces/_bridge.tscn" id="2_dl2vk"]
+[ext_resource type="PackedScene" uid="uid://bjiq8dr6fey8c" path="res://scenes/player.tscn" id="2_i45fh"]
+[ext_resource type="Texture2D" uid="uid://cbvohi1oe36bj" path="res://sprites/ui/speedometer.png" id="5_f1jyt"]
+[ext_resource type="Theme" uid="uid://b4vswvp7egrpr" path="res://ui/ main_theme.tres" id="5_ouuuo"]
+[ext_resource type="Texture2D" uid="uid://cw21omjd4c5bx" path="res://sprites/ui/HUD_right_front.png" id="6_rdxl6"]
+[ext_resource type="FontFile" uid="uid://biiw3vl4lgj7p" path="res://ui/E1234-Regular.otf" id="7_0w5j5"]
+[ext_resource type="Texture2D" uid="uid://ct4qlu76joiu4" path="res://sprites/ui/HUD_right_back.png" id="7_ur06w"]
+[ext_resource type="Texture2D" uid="uid://dxy1g0wdwdtvi" path="res://sprites/ui/HUD_left.png" id="10_l1nd5"]
+[ext_resource type="Texture2D" uid="uid://dd8m6cvpnegrd" path="res://sprites/ui/HUD_top_bulb.png" id="11_b5fnc"]
+[ext_resource type="Texture2D" uid="uid://c11vnnyr21hog" path="res://sprites/ui/HUD_middle_bulb.png" id="12_6bf60"]
+[ext_resource type="Texture2D" uid="uid://bwu51ki31lh4x" path="res://sprites/ui/HUD_bottom_bulb.png" id="13_5egev"]
+[ext_resource type="FontFile" uid="uid://dtfbndvnttgyg" path="res://ui/Good Old DOS.ttf" id="14_jb7t4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ibdk"]
+line_spacing = 2.0
+font = ExtResource("7_0w5j5")
+outline_size = 5
+outline_color = Color(1, 1, 1, 0.196078)
+
+[sub_resource type="LabelSettings" id="LabelSettings_avcrj"]
+line_spacing = 2.0
+font = ExtResource("7_0w5j5")
+font_size = 28
+outline_size = 5
+outline_color = Color(1, 1, 1, 0.196078)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c5nc7"]
+bg_color = Color(0, 0, 0, 0.882353)
+
+[sub_resource type="FontVariation" id="FontVariation_w18iu"]
+base_font = ExtResource("14_jb7t4")
+spacing_top = 2
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_wdci5")
+
+[node name="Level" type="Node2D" parent="."]
+
+[node name="Bridge Piece" parent="Level" instance=ExtResource("2_dl2vk")]
+position = Vector2(0, -1200)
+
+[node name="Sprite2D" parent="Level/Bridge Piece" index="6"]
+visible = true
+
+[node name="Player" parent="." instance=ExtResource("2_i45fh")]
+position = Vector2(0, -74)
+
+[node name="JetTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_ouuuo")
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.74
+anchor_top = 0.444
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_rdxl6")
+stretch_mode = 4
+
+[node name="FuelBar" type="ProgressBar" parent="UI/HUD/TextureRect"]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.0833333
+anchor_right = 0.9
+anchor_bottom = 0.916667
+grow_horizontal = 0
+grow_vertical = 2
+value = 100.0
+fill_mode = 3
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/TextureRect"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_ur06w")
+
+[node name="Speedometer" type="TextureRect" parent="UI/HUD/TextureRect"]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.916
+anchor_right = 0.75
+anchor_bottom = 0.916
+offset_top = -115.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.785398
+pivot_offset = Vector2(5, 115)
+texture = ExtResource("5_f1jyt")
+
+[node name="TextureRect2" type="TextureRect" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.444444
+anchor_right = 0.260417
+anchor_bottom = 1.0
+offset_top = 320.0
+offset_right = -260.0
+grow_vertical = 0
+texture = ExtResource("10_l1nd5")
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="UI/HUD/TextureRect2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.156667
+anchor_top = 0.722222
+anchor_right = 0.596667
+anchor_bottom = 0.775
+offset_right = -1.52588e-05
+text = "Score"
+label_settings = SubResource("LabelSettings_4ibdk")
+horizontal_alignment = 1
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ScoreDisplay" type="Label" parent="UI/HUD/TextureRect2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.155
+anchor_top = 0.763556
+anchor_right = 0.596
+anchor_bottom = 0.874556
+text = "0"
+label_settings = SubResource("LabelSettings_avcrj")
+horizontal_alignment = 2
+vertical_alignment = 2
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TopBulb" type="TextureRect" parent="UI/HUD/TextureRect2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_b5fnc")
+flip_h = true
+
+[node name="MiddleBulb" type="TextureRect" parent="UI/HUD/TextureRect2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_6bf60")
+flip_h = true
+
+[node name="BottomBulb" type="TextureRect" parent="UI/HUD/TextureRect2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_5egev")
+flip_h = true
+
+[node name="LoseScreen" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+
+[node name="Panel" type="Panel" parent="LoseScreen"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_ouuuo")
+theme_override_styles/panel = SubResource("StyleBoxFlat_c5nc7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LoseScreen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35
+anchor_right = 0.65
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="LoseScreen/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="LoseScreen/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="LoseScreen/Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="LoseScreen/Panel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Level:"
+
+[node name="FinalLevelLabel" type="Label" parent="LoseScreen/Panel/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "####"
+horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="LoseScreen/Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="LoseScreen/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Score:"
+
+[node name="FinalScoreLabel" type="Label" parent="LoseScreen/Panel/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "####"
+horizontal_alignment = 2
+
+[node name="HSeparator2" type="HSeparator" parent="LoseScreen/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LoseScreen/Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="UsernameTextEdit" type="LineEdit" parent="LoseScreen/Panel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = SubResource("FontVariation_w18iu")
+placeholder_text = "Enter Your Username"
+context_menu_enabled = false
+
+[node name="SubmitButton" type="Button" parent="LoseScreen/Panel/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = SubResource("FontVariation_w18iu")
+text = "Submit"
+
+[node name="SaveWarning" type="Label" parent="LoseScreen/Panel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Leaving the username field blank will result in the score not being saved.
+Submit again to confirm."
+horizontal_alignment = 1
+
+[connection signal="timeout" from="JetTimer" to="." method="spawn_jet"]
+[connection signal="pressed" from="LoseScreen/Panel/VBoxContainer/HBoxContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
+
+[editable path="Level/Bridge Piece"]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdmu30y73cjwc"]
+
+[ext_resource type="Shader" path="res://effects/shaders/grid_scroll.gdshader" id="1_4nwx4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_at3sw"]
+shader = ExtResource("1_4nwx4")
+shader_parameter/columns = 32.0
+shader_parameter/rows = 32.0
+shader_parameter/grid_width = 0.025
+shader_parameter/grid_color = Color(0.313726, 0, 0, 1)
+shader_parameter/base_color = Color(0, 0, 0, 1)
+shader_parameter/tiling = Vector2(1, 1)
+shader_parameter/offset = Vector2(-0.025, -0.025)
+
+[node name="Background" type="CanvasLayer"]
+layer = -1
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Grid" type="ColorRect" parent="Control"]
+material = SubResource("ShaderMaterial_at3sw")
+custom_minimum_size = Vector2(2500, 2500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1250.0
+offset_top = -1250.0
+offset_right = 1250.0
+offset_bottom = 1250.0
+grow_horizontal = 2
+grow_vertical = 2

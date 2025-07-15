@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=3 uid="uid://6lvl3qnm5vbf"]
+
+[ext_resource type="Script" path="res://scripts/piece.gd" id="1_vouur"]
+[ext_resource type="Texture2D" uid="uid://bc8cuoikllpml" path="res://sprites/levels/Bridge.png" id="2_4fnce"]
+[ext_resource type="Texture2D" uid="uid://dcuirqwbfwqgh" path="res://sprites/Bridge_Base.png" id="3_os8ek"]
+[ext_resource type="Texture2D" uid="uid://13p8wucmrooy" path="res://sprites/levels/start.png" id="4_27lv2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogh6f"]
+size = Vector2(302, 84)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2q6gc"]
+size = Vector2(1700, 150)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c78b3"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(125, 0, 1)
+direction = Vector3(0, -1, 0)
+spread = 5.0
+initial_velocity_min = 350.0
+initial_velocity_max = 550.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 200.0
+scale_min = 4.0
+scale_max = 12.0
+color = Color(1, 0, 0, 1)
+
+[node name="Bridge Piece" type="StaticBody2D"]
+position = Vector2(0, -850)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_vouur")
+
+[node name="Level" type="Sprite2D" parent="."]
+texture = ExtResource("2_4fnce")
+
+[node name="Bridge" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Bridge"]
+texture = ExtResource("3_os8ek")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bridge"]
+shape = SubResource("RectangleShape2D_ogh6f")
+
+[node name="Trigger Area" type="Area2D" parent="."]
+position = Vector2(0, -1275)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger Area"]
+shape = SubResource("RectangleShape2D_2q6gc")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, 350)
+build_mode = 1
+polygon = PackedVector2Array(300, 850, 301, 776, 151, 475, 151, -1176, 301, -1476, 301, -1555, 856, -1555, 851, 869)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, 350)
+build_mode = 1
+polygon = PackedVector2Array(-301, 850, -300, 775, -149, 475, -150, -1177, -300, -1474, -301, -1550, -842, -1550, -875, 846)
+
+[node name="BridgeExplosion" type="GPUParticles2D" parent="."]
+position = Vector2(0, 42)
+emitting = false
+amount = 125
+process_material = SubResource("ParticleProcessMaterial_c78b3")
+lifetime = 1.25
+one_shot = true
+explosiveness = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 1200)
+texture = ExtResource("4_27lv2")
+offset = Vector2(0, 150)
+flip_v = true
+
+[connection signal="body_entered" from="Bridge" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://blf7mep0qv41u"]
+
+[ext_resource type="Script" path="res://scripts/fuel.gd" id="1_kcfpa"]
+[ext_resource type="Texture2D" uid="uid://cxbflrqf3po1j" path="res://sprites/Fuel_Base.png" id="1_y6tep"]
+[ext_resource type="Material" uid="uid://bh2g40q1m751a" path="res://effects/particles/explosion.tres" id="3_pksy7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1135x"]
+size = Vector2(60, 40)
+
+[node name="Fuel" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_kcfpa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_y6tep")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1135x")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+process_mode = 3
+emitting = false
+amount = 100
+process_material = ExtResource("3_pksy7")
+one_shot = true
+explosiveness = 1.0
+randomness = 0.1

@@ -1,0 +1,676 @@
+[gd_scene load_steps=10 format=3 uid="uid://dj85rqbp3gu3p"]
+
+[ext_resource type="Theme" uid="uid://b4vswvp7egrpr" path="res://ui/ main_theme.tres" id="1_bvsve"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_qvwkd"]
+[ext_resource type="FontFile" uid="uid://dtfbndvnttgyg" path="res://ui/Good Old DOS.ttf" id="3_qhb3p"]
+[ext_resource type="Script" path="res://scripts/key_selector.gd" id="3_sn40t"]
+[ext_resource type="Texture2D" uid="uid://cxbflrqf3po1j" path="res://sprites/Fuel_Base.png" id="4_tq0lc"]
+[ext_resource type="Texture2D" uid="uid://cmtuqp4ugogep" path="res://sprites/Fighter_Base.png" id="5_8ikjb"]
+[ext_resource type="Texture2D" uid="uid://ch5rsust5rjmb" path="res://sprites/Boat_Base.png" id="6_shlw3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q7p22"]
+font_size = 64
+outline_size = 10
+outline_color = Color(1, 0, 0, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_xf43x"]
+base_font = ExtResource("3_qhb3p")
+spacing_top = 2
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bvsve")
+script = ExtResource("1_qvwkd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "
+DATA RAID"
+label_settings = SubResource("LabelSettings_q7p22")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = SubResource("FontVariation_xf43x")
+text = "PLAY"
+
+[node name="ScoresButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = SubResource("FontVariation_xf43x")
+text = "SCORES"
+
+[node name="TutorialButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = SubResource("FontVariation_xf43x")
+text = "HOW TO PLAY"
+
+[node name="SettingsButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = SubResource("FontVariation_xf43x")
+text = "SETTINGS"
+
+[node name="CreditsButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "CREDITS"
+
+[node name="QuitButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = SubResource("FontVariation_xf43x")
+text = "QUIT"
+
+[node name="Spacer" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScoreVBox" type="VBoxContainer" parent="HBoxContainer/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/ScoreVBox"]
+layout_mode = 2
+text = "HIGH SCORES"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Panel/ScoreVBox"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Panel/ScoreVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/ScoreVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name"
+
+[node name="Label2" type="Label" parent="HBoxContainer/Panel/ScoreVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Level"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="HBoxContainer/Panel/ScoreVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Score"
+horizontal_alignment = 2
+
+[node name="HSeparator3" type="HSeparator" parent="HBoxContainer/Panel/ScoreVBox"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Panel/ScoreVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 3
+
+[node name="ScoresList" type="VBoxContainer" parent="HBoxContainer/Panel/ScoreVBox/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/Panel/ScoreVBox"]
+layout_mode = 2
+
+[node name="SettingsVBox" type="VBoxContainer" parent="HBoxContainer/Panel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 0.9
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="HSeparator7" type="HSeparator" parent="HBoxContainer/Panel/SettingsVBox"]
+visible = false
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="HBoxContainer/Panel/SettingsVBox"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "GENERAL"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Panel/SettingsVBox"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Panel/SettingsVBox"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "Resolution"
+
+[node name="ResolutionOption" type="OptionButton" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator6" type="HSeparator" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "AUDIO"
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "Master"
+
+[node name="MasterLabel" type="Label" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+text = "100"
+horizontal_alignment = 1
+
+[node name="MasterSlider" type="HSlider" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "Music"
+
+[node name="MusicLabel" type="Label" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+text = "100"
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "Effects"
+
+[node name="EffectsLabel" type="Label" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+text = "100"
+horizontal_alignment = 1
+
+[node name="EffectsSlider" type="HSlider" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="HSeparator5" type="HSeparator" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CONTROLS"
+
+[node name="HSeparator3" type="HSeparator" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "Speed Up"
+
+[node name="SpeedUpKeybind" type="Button" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer7"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "Slow Down"
+
+[node name="SlowDownKeybind" type="Button" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer8"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "Move Left"
+
+[node name="MoveLeftKeybind" type="Button" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "Move Right"
+
+[node name="MoveRightKeybind" type="Button" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer6"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+text = "Fire"
+
+[node name="FireKeybind" type="Button" parent="HBoxContainer/Panel/SettingsVBox/HBoxContainer9"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+
+[node name="HSeparator4" type="HSeparator" parent="HBoxContainer/Panel/SettingsVBox"]
+layout_mode = 2
+
+[node name="FileNotification" type="Label" parent="HBoxContainer/Panel/SettingsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="TutorialVBox" type="VBoxContainer" parent="HBoxContainer/Panel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 0.9
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/TutorialVBox"]
+layout_mode = 2
+text = "HOW TO PLAY"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Panel/TutorialVBox"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer/Panel/TutorialVBox"]
+layout_mode = 2
+text = "Fly down the data stream, destroying as many obstacles as you can! 
+
+Charge stations can be flown over to increase charge or shot for points, but if you hit zero charge you lose instantly. Choose carefully!
+
+Between each level is a bridge that must be shot to continue. Each level is worth 500pts and if you beat two levels, you regain a lost life!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="HBoxContainer/Panel/TutorialVBox"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Panel/TutorialVBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel/TutorialVBox/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer/Panel/TutorialVBox/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Charge"
+horizontal_alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/Panel/TutorialVBox/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+texture = ExtResource("4_tq0lc")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/TutorialVBox/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "100pts"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/Panel/TutorialVBox/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer/Panel/TutorialVBox/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Virus"
+horizontal_alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/Panel/TutorialVBox/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+texture = ExtResource("5_8ikjb")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/TutorialVBox/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "75pts"
+horizontal_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/Panel/TutorialVBox/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer/Panel/TutorialVBox/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Packet"
+horizontal_alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer/Panel/TutorialVBox/HBoxContainer/VBoxContainer3"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+texture = ExtResource("6_shlw3")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/TutorialVBox/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "25pts"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/Panel/TutorialVBox"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="HBoxContainer/Panel/TutorialVBox"]
+layout_mode = 2
+text = "GOOD LUCK!"
+horizontal_alignment = 1
+
+[node name="CreditsVBox" type="VBoxContainer" parent="HBoxContainer/Panel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_right = 0.9
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/CreditsVBox"]
+layout_mode = 2
+text = "CREDITS"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/Panel/CreditsVBox"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel/CreditsVBox"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Programming & Visuals: "
+
+[node name="LinkButton" type="LinkButton" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_bvsve")
+text = "BanesBloom"
+uri = "https://banesbloom.itch.io"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Gameplay Loop & UI Beeps: "
+
+[node name="LinkButton" type="LinkButton" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_bvsve")
+text = "Zahdernia"
+uri = "https://zahdernia.nekoweb.org"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Main Menu Loop: "
+
+[node name="LinkButton" type="LinkButton" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_bvsve")
+text = "Bit by Bit Sound"
+uri = "https://bit-by-bit-sound.itch.io/8-bit-music-booster-pack"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "SFX: "
+
+[node name="LinkButton" type="LinkButton" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_bvsve")
+text = "Beep Yeah!"
+uri = "https://beepyeah.itch.io/8-bit-sfx-pack"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "HUD Font: "
+
+[node name="LinkButton" type="LinkButton" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_bvsve")
+text = "GGBotNet"
+uri = "https://ggbot.itch.io/e1234-font"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+text = "Main Menu Font: "
+
+[node name="LinkButton" type="LinkButton" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_bvsve")
+text = "Daymarius"
+uri = "https://www.dafont.com/good-old-dos.font"
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+text = "Scrolling Grid Shader: "
+
+[node name="LinkButton" type="LinkButton" parent="HBoxContainer/Panel/CreditsVBox/VBoxContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_bvsve")
+text = "Based on this."
+uri = "https://godotshaders.com/shader/2d-grid-with-adjacent-cells/"
+
+[node name="HSeparator3" type="HSeparator" parent="HBoxContainer/Panel/CreditsVBox"]
+layout_mode = 2
+
+[node name="KeySelector" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_sn40t")
+
+[node name="Label" type="Label" parent="KeySelector"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press any key..."
+
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/PlayButton" to="." method="_on_menu_button_mouse_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/ScoresButton" to="." method="_on_menu_button_mouse_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/ScoresButton" to="." method="_on_scores_button_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/TutorialButton" to="." method="_on_menu_button_mouse_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/TutorialButton" to="." method="_on_tutorial_button_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/SettingsButton" to="." method="_on_menu_button_mouse_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/CreditsButton" to="." method="_on_menu_button_mouse_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_menu_button_mouse_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="HBoxContainer/Panel/SettingsVBox/HBoxContainer2/MasterSlider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/Panel/SettingsVBox/HBoxContainer3/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/Panel/SettingsVBox/HBoxContainer4/EffectsSlider" to="." method="_on_effects_slider_value_changed"]

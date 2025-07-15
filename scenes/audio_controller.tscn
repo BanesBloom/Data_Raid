@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdx3ygnvno63a"]
+
+[ext_resource type="Script" path="res://scripts/audio_controller.gd" id="1_wfrtv"]
+
+[node name="AudioController" type="Node"]
+script = ExtResource("1_wfrtv")
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+autoplay = true
+bus = &"Music"

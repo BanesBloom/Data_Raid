@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://mbqlqiphsblu"]
+
+[ext_resource type="Script" path="res://scripts/piece.gd" id="1_8tucf"]
+[ext_resource type="Texture2D" uid="uid://1i6loutr5fv5" path="res://sprites/levels/normal_2.png" id="2_haxgw"]
+[ext_resource type="PackedScene" uid="uid://blf7mep0qv41u" path="res://scenes/fuel.tscn" id="3_tgogb"]
+[ext_resource type="PackedScene" uid="uid://cxrktxnkfcvr3" path="res://scenes/boat.tscn" id="4_xjy5d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wcml1"]
+size = Vector2(1700, 150)
+
+[node name="Piece" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_8tucf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_haxgw")
+
+[node name="Trigger Area" type="Area2D" parent="."]
+position = Vector2(0, -1275)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger Area"]
+shape = SubResource("RectangleShape2D_wcml1")
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Fuel" parent="Obstacles" instance=ExtResource("3_tgogb")]
+position = Vector2(-114, -97)
+
+[node name="Boat" parent="Obstacles" instance=ExtResource("4_xjy5d")]
+position = Vector2(-158, 533)
+
+[node name="Boat2" parent="Obstacles" instance=ExtResource("4_xjy5d")]
+position = Vector2(149, -288)
+
+[node name="Boat3" parent="Obstacles" instance=ExtResource("4_xjy5d")]
+position = Vector2(-2, -1168)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(300, -1199, 850, -1200, 864, 1220, 299, 1199, 299, 1125, -150, 601, 74, 150, 300, 151, 299, -299, 450, -599, 300, -1124)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-301, -1200, -853, -1203, -860, 1199, -301, 1202, -300, 1126, -450, 600, -300, 300, -301, -152, -76, -152, 150, -600, -299, -1125)
