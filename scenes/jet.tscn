@@ -11,7 +11,7 @@ size = Vector2(58, 42)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_ru24t"]
+[sub_resource type="CurveTexture" id="CurveTexture_syo3j"]
 curve = SubResource("Curve_fg53a")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vmtva"]
@@ -20,7 +20,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 10.0
 scale_max = 10.0
 color = Color(1, 0, 0, 1)
-alpha_curve = SubResource("CurveTexture_ru24t")
+alpha_curve = SubResource("CurveTexture_syo3j")
 
 [node name="Jet" type="CharacterBody2D"]
 collision_layer = 8

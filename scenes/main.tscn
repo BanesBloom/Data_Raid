@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dfween68itcrb"]
+[gd_scene load_steps=24 format=3 uid="uid://dfween68itcrb"]
 
 [ext_resource type="Script" path="res://scripts/main_controller.gd" id="1_wdci5"]
 [ext_resource type="PackedScene" uid="uid://6lvl3qnm5vbf" path="res://scenes/pieces/_bridge.tscn" id="2_dl2vk"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://c11vnnyr21hog" path="res://sprites/ui/HUD_middle_bulb.png" id="12_6bf60"]
 [ext_resource type="Texture2D" uid="uid://bwu51ki31lh4x" path="res://sprites/ui/HUD_bottom_bulb.png" id="13_5egev"]
 [ext_resource type="FontFile" uid="uid://dtfbndvnttgyg" path="res://ui/Good Old DOS.ttf" id="14_jb7t4"]
+[ext_resource type="Script" path="res://scenes/particle_cache.gd" id="14_nkmn6"]
+[ext_resource type="Material" uid="uid://bh2g40q1m751a" path="res://effects/particles/explosion.tres" id="15_gkm48"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4ibdk"]
 line_spacing = 2.0
@@ -33,6 +35,37 @@ bg_color = Color(0, 0, 0, 0.882353)
 [sub_resource type="FontVariation" id="FontVariation_w18iu"]
 base_font = ExtResource("14_jb7t4")
 spacing_top = 2
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uly1n"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(125, 0, 1)
+direction = Vector3(0, -1, 0)
+spread = 5.0
+initial_velocity_min = 350.0
+initial_velocity_max = 550.0
+gravity = Vector3(0, 0, 0)
+damping_min = 200.0
+damping_max = 200.0
+scale_min = 4.0
+scale_max = 12.0
+color = Color(1, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_q5s0r"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ru24t"]
+curve = SubResource("Curve_q5s0r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8ixbh"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 10.0
+scale_max = 10.0
+color = Color(1, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_ru24t")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_wdci5")
@@ -295,6 +328,35 @@ grow_vertical = 0
 text = "Leaving the username field blank will result in the score not being saved.
 Submit again to confirm."
 horizontal_alignment = 1
+
+[node name="ParticleCache" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, 1104)
+script = ExtResource("14_nkmn6")
+
+[node name="BridgeExplosion" type="GPUParticles2D" parent="ParticleCache"]
+position = Vector2(0, 42)
+emitting = false
+amount = 125
+process_material = SubResource("ParticleProcessMaterial_uly1n")
+lifetime = 1.25
+one_shot = true
+explosiveness = 1.0
+
+[node name="Explosion" type="GPUParticles2D" parent="ParticleCache"]
+process_mode = 3
+emitting = false
+amount = 100
+process_material = ExtResource("15_gkm48")
+one_shot = true
+explosiveness = 1.0
+randomness = 0.1
+
+[node name="Trail" type="GPUParticles2D" parent="ParticleCache"]
+position = Vector2(-25, 0)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_8ixbh")
+lifetime = 0.5
 
 [connection signal="timeout" from="JetTimer" to="." method="spawn_jet"]
 [connection signal="pressed" from="LoseScreen/Panel/VBoxContainer/HBoxContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
